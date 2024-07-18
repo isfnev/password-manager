@@ -1,17 +1,27 @@
 import oracledb
+from email_validator import validate_email, EmailNotValidError
 
 conn = oracledb.connect(user='abhishek', password='negi88412', dsn='localhost:1521/XEPDB1')
 cursor = conn.cursor()
 
+def is_valid_email(email):
+    try:
+        v = validate_email(email)
+        return True
+    except EmailNotValidError as e:
+        print(f"Invalid email:{str(e)}")
+        return False
+
 def create_account(email:str, password:str)->None:
-    if (check_element_presence(email)):
-        print('There is an account already linked with it')
-    else:
-        try:
-            cursor.execute(f"insert into logindb(email, password) values ('{email}', '{password}')")
-            conn.commit()
-        except oracledb.DatabaseError as e:
-            print(f'Database error:{e}')
+    if is_valid_email(email):
+        if (check_element_presence(email)):
+            print('There is an account already linked with it')
+        else:
+            try:
+                cursor.execute(f"insert into logindb(email, password) values ('{email}', '{password}')")
+                conn.commit()
+            except oracledb.DatabaseError as e:
+                print(f'Database error:{e}')
 
 def show_logindb()->None:
     try:
