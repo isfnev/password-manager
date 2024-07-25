@@ -1,0 +1,5 @@
+Python 3.0
+tkinter
+ttkthemes
+cryptography
+pyperclip
