@@ -9,7 +9,6 @@ import random
 import string
 import pyperclip
 
-# Generate or load encryption key
 def load_key():
     if not os.path.exists("secret.key"):
         key = Fernet.generate_key()
@@ -20,14 +19,12 @@ def load_key():
             key = key_file.read()
     return key
 
-# Encrypt and decrypt functions
 def encrypt_message(message: str) -> str:
     return cipher_suite.encrypt(message.encode()).decode()
 
 def decrypt_message(encrypted_message: str) -> str:
     return cipher_suite.decrypt(encrypted_message.encode()).decode()
 
-# Save password function
 def save_password():
     website = entry_website.get()
     username = entry_username.get()
@@ -41,7 +38,6 @@ def save_password():
     else:
         messagebox.showwarning("Input Error", "Please fill in all fields")
 
-# View saved passwords in a table format
 def view_passwords():
     view_window = tk.Toplevel(root)
     view_window.title("Saved Passwords")
@@ -53,7 +49,6 @@ def view_passwords():
     tree.heading("Username", text="Username")
     tree.heading("Password", text="Password")
 
-    # Set column widths
     tree.column("Website", width=150)
     tree.column("Username", width=150)
     tree.column("Password", width=200)
@@ -70,12 +65,10 @@ def view_passwords():
 
     tree.pack(fill=tk.BOTH, expand=True)
 
-    # Add a scrollbar
     scrollbar = ttk.Scrollbar(view_window, orient="vertical", command=tree.yview)
     tree.configure(yscroll=scrollbar.set)
     scrollbar.pack(side='right', fill='y')
 
-# Forget password function
 def forget_password():
     website = entry_website.get()
     if website:
@@ -93,7 +86,6 @@ def forget_password():
     else:
         messagebox.showwarning("Input Error", "Please enter the website to forget")
 
-# Generate random password function
 def generate_random_password():
     length = 12
     characters = string.ascii_letters + string.digits + string.punctuation
@@ -102,7 +94,6 @@ def generate_random_password():
     entry_password.insert(0, password)
     update_password_strength(password)
 
-# Copy password to clipboard
 def copy_to_clipboard():
     password = entry_password.get()
     if password:
@@ -111,14 +102,12 @@ def copy_to_clipboard():
     else:
         messagebox.showwarning("Input Error", "No password to copy")
 
-# Clear all input fields
 def clear_fields():
     entry_website.delete(0, tk.END)
     entry_username.delete(0, tk.END)
     entry_password.delete(0, tk.END)
     password_strength_label.config(text="")
 
-# Password strength indicator
 def update_password_strength(password):
     strength = "Weak"
     if len(password) >= 8 and any(c.isdigit() for c in password) and any(c.isupper() for c in password) and any(c in string.punctuation for c in password):
@@ -127,7 +116,6 @@ def update_password_strength(password):
         strength = "Medium"
     password_strength_label.config(text=f"Password Strength: {strength}")
 
-# Search saved passwords
 def search_password():
     search_website = entry_website.get()
     if search_website and os.path.exists("passwords.txt"):
@@ -153,7 +141,6 @@ def user_interface():
     root.geometry("415x360+450+150")
     root.resizable(False, False)
 
-    # Create a style
     style = ttk.Style()
     style.configure("TFrame", background="#f0f0f0")
     style.configure("TLabel", background="#f0f0f0", font=("Arial", 12))
@@ -227,7 +214,6 @@ def main_window():
     login_root.geometry("350x220+450+200")
     login_root.resizable(False, False)
 
-    # Create a style
     style = ttk.Style()
     style.configure("TFrame", background="#f0f0f0")
     style.configure("TLabel", background="#f0f0f0", font=("Arial", 12))
@@ -257,7 +243,6 @@ def main_window():
     entry_login_password = ttk.Entry(frame, width=30, show="*")
     entry_login_password.grid(row=2, column=1, padx=10, pady=5, sticky=tk.W)
 
-    # Buttons arranged in a grid layout
     button_frame = ttk.Frame(frame, style="TFrame")
     button_frame.grid(row=3, column=0, columnspan=2, pady=10)
     button_frame.columnconfigure(0, weight=1)
@@ -274,7 +259,6 @@ def main_window():
 
     login_root.mainloop()
 
-# Authenticate user function
 def authenticate_user():
     email = entry_login_email.get()
     password = entry_login_password.get()
@@ -293,7 +277,6 @@ def authenticate_user():
     else:
         messagebox.showwarning("Error", "No registered users found")
 
-# Register user function
 def register_user():
     email = entry_login_email.get()
     password = entry_login_password.get()

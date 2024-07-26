@@ -1,0 +1,111 @@
+Password Manager
+
+Description
+This project is a Password Manager application developed using Python and Tkinter. It allows users to securely store and manage their passwords for various websites. The application provides functionalities such as saving passwords, viewing saved passwords, generating random passwords, copying passwords to the clipboard, searching for specific passwords, and forgetting passwords. Additionally, users can create and manage accounts.
+
+Features
+Save Passwords: Save passwords for different websites with encryption.
+View Passwords: View saved passwords in a table format.
+Generate Random Passwords: Generate strong random passwords.
+Copy Password to Clipboard: Copy a password to the clipboard.
+Search Passwords: Search for a specific password by website.
+Forget Password: Remove a saved password.
+Account Management: Create and manage user accounts.
+Password Strength Indicator: Display password strength.
+
+Requirements
+Python 3.x
+Tkinter
+ttkthemes
+cryptography
+email-validator
+pyperclip
+Installation
+Clone the repository:
+
+sh
+Copy code
+git clone https://github.com/isfnev/password-manager.git
+cd password-manager
+Install the required packages:
+
+sh
+Copy code
+pip install tkinter ttkthemes cryptography email-validator pyperclip
+or
+pip install -r requirements.txt
+Usage
+Run the application:
+
+sh
+Copy code
+python final_password_manager.py
+The main window will prompt for login credentials. Create a new account if you don't have one.
+
+Use the provided functionalities to manage your passwords securely.
+
+Code Overview
+Main Functions
+load_key()
+
+Generates or loads an encryption key.
+encrypt_message(message)
+
+Encrypts a message using the encryption key.
+decrypt_message(encrypted_message)
+
+Decrypts an encrypted message using the encryption key.
+save_password()
+
+Saves an encrypted password to a text file.
+view_passwords()
+
+Displays saved passwords in a table format with a scrollbar.
+forget_password()
+
+Removes a saved password by website name.
+generate_random_password()
+
+Generates a strong random password and updates the password strength indicator.
+copy_to_clipboard()
+
+Copies the current password to the clipboard.
+clear_fields()
+
+Clears all input fields.
+update_password_strength(password)
+
+Updates the password strength indicator based on the given password.
+search_password()
+
+Searches for a specific password by website name.
+user_interface()
+
+Sets up the main GUI for the password manager.
+login(entry_username, entry_password)
+
+Handles user login.
+create_account(window)
+
+Opens a window to create a new account.
+is_valid_email(email)
+
+Validates an email address.
+check_element_presence(column, value)
+
+Checks if a value is present in a specific column of the database.
+create_account_logic(email, password)
+
+Handles the logic for creating a new account.
+reset_password_logic(username)
+
+Handles the logic for resetting a password.
+main_window()
+
+Sets up the main login window.
+File Storage
+passwords.txt
+
+Stores encrypted passwords.
+secret.key
+
